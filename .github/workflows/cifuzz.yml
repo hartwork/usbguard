@@ -4,6 +4,12 @@ jobs:
   Fuzzing:
     runs-on: ubuntu-latest
     steps:
+    - name: "Debug GITHUB_* variables"
+      run: |
+        set -x
+        env | grep GITHUB_ | sort
+        cat "${GITHUB_EVENT_PATH}"
+
     - name: Build Fuzzers
       id: build
       uses: hartwork/oss-fuzz/infra/cifuzz/actions/build_fuzzers@issue-10472-debugging
